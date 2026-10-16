@@ -28,6 +28,8 @@ done
 /usr/bin/plutil -lint "$task_plist"
 /bin/zsh -n "$task_out/Contents/Resources/launch.zsh"
 /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$task_out" "$task_root/dist/ChatGPT-Clash-Launcher-macOS.zip"
-/usr/bin/shasum -a 256 "$task_root/dist/ChatGPT-Clash-Launcher-macOS.zip" > "$task_root/dist/SHA256SUMS.txt"
+(
+  cd "$task_root/dist"
+  /usr/bin/shasum -a 256 'ChatGPT-Clash-Launcher-macOS.zip' > SHA256SUMS.txt
+)
 print "Built: $task_out"
-
