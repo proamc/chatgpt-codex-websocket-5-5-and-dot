@@ -15,9 +15,9 @@ A reproducible proxy setup: system proxy on, TUN off, verified per connection.
 
 如果你使用 Clash，浏览器能上网，但 ChatGPT/Codex 仍反复重连，或者 dot 无法操作本机，这份指南提供一条可检查、可撤销的配置路径。
 
-仓库只有两份文档：本页解释方案和使用顺序，[forchatgpt.md](forchatgpt.md) 提供可交给本地助手执行的完整任务指令。**不需要下载或运行本仓库发布的应用包。** 专用入口由助手在你的电脑上根据实际环境生成。
+仓库只有两份文档：本页解释方案和使用顺序，[forchatgpt.md](forchatgpt.md) 是独立执行指南。**只把 `forchatgpt.md` 附给新 Mac 上的本地助手，并说“请按这个文件配置这台 Mac”即可开始，不需要同时附上 README 或此前聊天。** 它包含首次安装与登录引导、所有技术参数、入口制作配方，以及重开后的恢复指令。**不需要下载或运行本仓库发布的应用包。** 专用入口由助手在你的电脑上根据实际环境生成。
 
-适用前提：一台 Mac、已安装的官方桌面应用、可用的 Clash HTTP/Mixed 代理，以及能够在这台 Mac 上操作的本地助手。本文不提供代理订阅、账号或其他平台的安装脚本。
+执行前提是一台满足当前官方系统要求的 Mac，以及一个能响应并具有本机文件和命令工具的助手。应用尚未安装、尚未登录、配置文件尚未生成时，独立指南会从零号步骤引导；账号、可用订阅和首次权限仍由本人提供或确认。普通文字问答或云端执行环境不能代替本机工具。本文不提供代理订阅、账号或其他平台的安装脚本。
 
 ### 我是怎样走到这套方案的
 
@@ -60,14 +60,16 @@ flowchart LR
 | --- | --- | --- |
 | 1. 确认基础连接 | 安装并登录官方应用；导入自己的 Clash 订阅，验证网页访问 | 代理节点与基础访问可用 |
 | 2. 固定配置基线 | 规则模式、系统代理开、TUN 关；记录实际 HTTP/Mixed 端口和应用位置 | 端口、路径、版本均已核实 |
-| 3. 交给本地助手 | 发送下方任务，让助手按 `forchatgpt.md` 检查兼容性、备份配置、制作入口 | 无终端入口、候选配置和撤销方法已准备 |
+| 3. 交给本地助手 | 仅附上 `forchatgpt.md`；助手检查兼容性、备份或创建首次配置、制作入口并保存本机断点 | 无终端入口、候选配置、撤销与恢复记录已准备 |
 | 4. 集中应用改动 | 合并[模型配置](#configuration)，固定程序坞入口；保存任务，完整退出并从专用入口重开 | 目标应用及执行器获得预期代理参数 |
 | 5. 验证模型 | 新建本地 Codex 聊天，完成连续短请求并检查实际传输 | `openai_https`、`responses_http` 与完整回复得到确认 |
 | 6. 验证 dot | 授权本机访问，实际查询系统版本，再做间隔复测 | 取得这台 Mac 的工具结果，并记录连接状态 |
 
 可直接发给本地助手：
 
-> 请阅读本仓库的 readme.md 和 forchatgpt.md，按主路径检查并配置这台 Mac。保持 Clash 系统代理开启、TUN 关闭，制作不弹终端的专用启动入口并固定到程序坞。先完成环境检查、备份和准备，再安排一次正常重开，分别验证模型 HTTPS 与 dot 本机执行。不要修改全局登录代理，不要强退我正在使用的应用。
+> 请按随附的 forchatgpt.md 检查并配置这台 Mac；这份文件包含完整步骤，不依赖旧聊天。保持 Clash 系统代理开启、TUN 关闭，制作不弹终端的专用启动入口并固定到程序坞。先完成环境检查、备份和准备，再安排一次正常重开，分别验证模型 HTTPS 与 dot 本机执行。不要修改全局登录代理，不要强退我正在使用的应用。
+
+重开前助手会保存本文件副本与 `setup-state.md`，并给出包含真实本机路径的恢复指令。重开后新建本地 Codex 聊天，按该指令继续剩余验收，避免重复覆盖配置或创建入口。
 
 常见混合端口为 `7897`，但必须以本机为准。原版应用可能位于 `/Applications/ChatGPT.app` 或 `/Applications/Codex.app`，也需要核实。使用 HTTP 代理 URL 时，不能填写 SOCKS-only 端口。
 
@@ -100,9 +102,9 @@ flowchart LR
 
 This guide is for a Mac where Clash works in the browser, but ChatGPT/Codex keeps reconnecting or dot cannot execute on the local computer.
 
-The repository contains two instruction files: this README explains the approach; [forchatgpt.md](forchatgpt.md) is an execution brief for an assistant with local access. No prebuilt application download is required. The assistant creates a dedicated launcher on your own Mac using its actual app path and proxy port.
+The repository contains two instruction files. This README explains the approach; **[forchatgpt.md](forchatgpt.md) is self-contained**. Attach only that file to a local assistant and ask: “Configure this Mac using this file.” No README, previous conversation, old Mac or recovery package is required. It includes bootstrap/sign-in guidance, native launcher construction, first-time config handling and a restart checkpoint. No prebuilt application download is required. The assistant creates a dedicated launcher on your own Mac using its actual app path and proxy port.
 
-Prerequisites: the official desktop app, a working Clash HTTP/Mixed proxy, your own account and subscription, and an assistant able to operate locally. Windows is outside this guide's scope.
+The execution prerequisite is a currently supported Mac and a responsive assistant with local file and command tools. If the apps, sign-in or config file are missing, the brief starts with bootstrap. The user still supplies an account and working subscription and confirms first-time permissions. A text-only chat or cloud computer is not a substitute. Windows is outside this guide's scope.
 
 ### How I arrived here
 
@@ -126,14 +128,16 @@ Prepare everything before restarting the desktop app. If a prerequisite fails, r
 | --- | --- | --- |
 | 1. Establish connectivity | Install and sign in to the official apps; import your own Clash subscription; test browser access | Basic proxy connectivity works |
 | 2. Record the baseline | Rule mode, system proxy on, TUN off; identify the real HTTP/Mixed port, app path and versions | Inputs are verified |
-| 3. Prepare locally | Give the assistant `forchatgpt.md`; check compatibility, back up config and create the launcher | Launcher, candidate config and rollback steps are ready |
+| 3. Prepare locally | Attach only `forchatgpt.md`; check compatibility, back up or create config, build the launcher and save a local checkpoint | Launcher, candidate config, rollback and resume record are ready |
 | 4. Apply together | Merge the [model config](#configuration), pin the launcher, save work and reopen the app through it | Target processes inherit the intended proxy values |
 | 5. Verify models | Create a new local Codex conversation, complete six short requests and inspect transport | `openai_https`, `responses_http` and completed responses are confirmed |
 | 6. Verify dot | Allow access to this Mac, perform a real read-only local query and repeat after intervals | Local tool results and connection behavior are recorded |
 
 Copy this task to a local assistant:
 
-> Read this repository's readme.md and forchatgpt.md, then follow the primary path to configure this Mac. Keep Clash's system proxy on and TUN off. Create a dedicated launcher that opens the official app without a Terminal window and pin it to the Dock. Complete checks, backups and preparation before one normal app restart. Verify model HTTPS transport and dot's actual local execution separately. Do not set a global login proxy or force-quit active work.
+> Use the attached forchatgpt.md to configure this Mac; it contains the complete workflow and requires no prior conversation. Keep Clash's system proxy on and TUN off. Create a dedicated launcher that opens the official app without a Terminal window and pin it to the Dock. Complete checks, backups and preparation before one normal app restart. Verify model HTTPS transport and dot's actual local execution separately. Do not set a global login proxy or force-quit active work.
+
+Before restarting, the assistant saves the brief and `setup-state.md` in a persistent local directory and gives a resume message with the actual paths. Open a new local Codex conversation after restarting and use that message to finish verification without repeating the setup.
 
 Use the actual port; `7897` is only a common default. Verify whether the official app is installed as `/Applications/ChatGPT.app`, `/Applications/Codex.app`, or elsewhere. An HTTP proxy URL must point to an HTTP/Mixed port, not a SOCKS-only listener.
 
